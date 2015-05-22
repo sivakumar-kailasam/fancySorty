@@ -6,5 +6,6 @@ sortomatic.log
 *.iml
 *.ipr
 out
+tmp
 *.iws
 .gradle
