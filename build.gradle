@@ -10,7 +10,7 @@ repositories {
 task createSampleInput {
     doFirst {
         println 'This creates a sample input file, you know for testing the app manually'
-        file("../input.txt").withWriter{writer->
+        file("input.txt").withWriter{writer->
             for(no in 1..10){
                 writer << "$no\n" 
             }
