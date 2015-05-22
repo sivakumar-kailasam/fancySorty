@@ -27,7 +27,7 @@ public class SortedFileSplitterTest {
     }
 
     @Test
-    public void createTempFolderWhenItDoesntExist() throws Exception {
+    public void createTempFolderWhenItIsNonExistent() throws Exception {
 
         File testFolder = new File(systemTempDirectory, "siva");
         String testFolderPath = testFolder.getAbsolutePath();

@@ -51,24 +51,31 @@ public class SortedFileSplitter {
 
             List<BigInteger> sortedContent = sorty.sortReverse(contentToBeSorted);
 
-            File temporaryFile = File.createTempFile("sortomatic", ".tmp", this.temporaryFolder);
-            temporaryFile.deleteOnExit();
+            File temporaryFile = createTempFileWithSortedContent(sortedContent);
 
-            OutputStream outputStream = new FileOutputStream(temporaryFile);
-            BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, Charset.defaultCharset()));
-
-            for (BigInteger number : sortedContent) {
-                bufferedWriter.write(number.toString());
-                bufferedWriter.newLine();
-            }
-
-            bufferedWriter.close();
             splitSortedFiles.add(temporaryFile);
+
             contentToBeSorted.clear();
 
         }
 
         return splitSortedFiles;
+    }
+
+    private File createTempFileWithSortedContent(List<BigInteger> sortedContent) throws IOException {
+        File temporaryFile = File.createTempFile("sortomatic", ".tmp", this.temporaryFolder);
+        temporaryFile.deleteOnExit();
+
+        OutputStream outputStream = new FileOutputStream(temporaryFile);
+        BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, Charset.defaultCharset()));
+
+        for (BigInteger number : sortedContent) {
+            bufferedWriter.write(number.toString());
+            bufferedWriter.newLine();
+        }
+
+        bufferedWriter.close();
+        return temporaryFile;
     }
 
 
