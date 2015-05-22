@@ -12,22 +12,23 @@ import java.util.List;
 /**
  * @author Sivakumar Kailasam
  */
-public class SortedFileSplitter {
+public final class SortedFileSplitter {
 
     private static Logger logger = LoggerFactory.getLogger(SortedFileSplitter.class);
 
-    private Sorty sorty;
+    private CollectionSorter collectionSorter;
 
     private long maxChunkSizeLimit;
 
     private File temporaryFolder;
 
-    public SortedFileSplitter(String temporaryFolder, Sorty sorty, long maxChunkSizeLimit) {
+    public SortedFileSplitter(String temporaryFolder, CollectionSorter collectionSorter, long maxChunkSizeLimit) {
         this.temporaryFolder = new File(temporaryFolder);
         if (!this.temporaryFolder.exists()) {
+            logger.debug("Creating temporary folder {} since it doesn't exist", this.temporaryFolder.getAbsolutePath());
             this.temporaryFolder.mkdir();
         }
-        this.sorty = sorty;
+        this.collectionSorter = collectionSorter;
         this.maxChunkSizeLimit = maxChunkSizeLimit;
     }
 
@@ -49,7 +50,7 @@ public class SortedFileSplitter {
                 currentChunkSize += line.length() * 2;
             }
 
-            List<BigInteger> sortedContent = sorty.sortReverse(contentToBeSorted);
+            List<BigInteger> sortedContent = collectionSorter.sortReverse(contentToBeSorted);
 
             File temporaryFile = createTempFileWithSortedContent(sortedContent);
 
@@ -65,6 +66,8 @@ public class SortedFileSplitter {
     private File createTempFileWithSortedContent(List<BigInteger> sortedContent) throws IOException {
         File temporaryFile = File.createTempFile("sortomatic", ".tmp", this.temporaryFolder);
         temporaryFile.deleteOnExit();
+
+        logger.debug("Created temp file {}", temporaryFile.getAbsolutePath());
 
         OutputStream outputStream = new FileOutputStream(temporaryFile);
         BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, Charset.defaultCharset()));

@@ -1,0 +1,69 @@
+package com.sk.sortomatic;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.math.BigInteger;
+import java.util.Comparator;
+import java.util.List;
+import java.util.PriorityQueue;
+
+/**
+ * @author Sivakumar Kailasam
+ */
+public class SortedContentMerger {
+
+
+    public void writeSortedStreamCollectionToWriter(List<BufferedReader> contentCollection, final BufferedWriter bufferedFileWriter, int topNLinesToFind) throws IOException {
+
+        PriorityQueue<CachedBufferedReader> queueOfBuffers = getBufferedReaderPriorityQueue();
+
+        for (BufferedReader br : contentCollection) {
+            queueOfBuffers.add(new CachedBufferedReader(br));
+        }
+
+        int noOfLinesProcessed = 0;
+
+        while (queueOfBuffers.size() > 0 && (noOfLinesProcessed < topNLinesToFind)) {
+
+            CachedBufferedReader br = queueOfBuffers.poll();
+
+            String line = br.getLine();
+            bufferedFileWriter.write(line);
+            bufferedFileWriter.newLine();
+
+            if (br.isEmpty()) {
+                br.close();
+            } else {
+                queueOfBuffers.add(br);
+            }
+
+            noOfLinesProcessed++;
+        }
+
+        bufferedFileWriter.close();
+
+    }
+
+
+    private PriorityQueue<CachedBufferedReader> getBufferedReaderPriorityQueue() {
+
+        return new PriorityQueue<CachedBufferedReader>(10, new Comparator<CachedBufferedReader>() {
+            @Override
+            public int compare(CachedBufferedReader firstCBR, CachedBufferedReader secondCBR) {
+
+                BigInteger topNoInFirstBR = BigInteger.valueOf(Long.valueOf(firstCBR.getCachedLine()));
+                BigInteger topNoInSecondBR = BigInteger.valueOf(Long.valueOf(secondCBR.getCachedLine()));
+
+                return new ReverseBigIntComparator().compare(topNoInFirstBR, topNoInSecondBR);
+
+            }
+        });
+
+    }
+
+
+}

@@ -16,14 +16,16 @@ import static org.junit.Assert.assertEquals;
  */
 public class SortedFileSplitterTest {
 
+
     private SortedFileSplitter sortedFileSplitter;
+
     private String systemTempDirectory = System.getProperty("java.io.tmpdir");
 
 
     @Before
     public void setUp() throws Exception {
         long testChunkSize = 10;
-        sortedFileSplitter = new SortedFileSplitter(systemTempDirectory, new Sorty(), testChunkSize);
+        sortedFileSplitter = new SortedFileSplitter(systemTempDirectory, new CollectionSorter(), testChunkSize);
     }
 
 
@@ -35,7 +37,7 @@ public class SortedFileSplitterTest {
         if (testFolder.exists()) {
             testFolder.delete();
         }
-        new SortedFileSplitter(testFolderPath, new Sorty(), 1l);
+        new SortedFileSplitter(testFolderPath, new CollectionSorter(), 1l);
         assertThat(testFolder).exists();
         testFolder.delete();
 

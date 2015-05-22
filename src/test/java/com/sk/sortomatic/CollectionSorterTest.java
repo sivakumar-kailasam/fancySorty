@@ -14,14 +14,14 @@ import static org.junit.Assert.assertNotNull;
 /**
  * @author Sivakumar Kailasam
  */
-public class SortyTest {
+public class CollectionSorterTest {
 
-    private Sorty sorty;
+    private CollectionSorter collectionSorter;
 
 
     @Before
     public void setUp() throws Exception {
-        sorty = new Sorty();
+        collectionSorter = new CollectionSorter();
     }
 
 
@@ -29,7 +29,7 @@ public class SortyTest {
     public void givenEmptyCollectionReturnsAnEmptyCollection() throws Exception {
 
         List<BigInteger> nos = new ArrayList<BigInteger>();
-        List<BigInteger> result = sorty.sortReverse(nos);
+        List<BigInteger> result = collectionSorter.sortReverse(nos);
 
         assertNotNull(result);
         assertEquals(0, result.size());
@@ -40,7 +40,7 @@ public class SortyTest {
     @Test
     public void givenOneNumberInCollectionItReturnsIt() throws Exception {
         List<BigInteger> nos = Arrays.asList(BigInteger.ONE);
-        List<BigInteger> result = sorty.sortReverse(nos);
+        List<BigInteger> result = collectionSorter.sortReverse(nos);
         assertEquals(nos, result);
     }
 
@@ -66,7 +66,7 @@ public class SortyTest {
 
 
     private void givenXUnorderedNumbersInCollectionItOrdersIt(List<BigInteger> input, List<BigInteger> expectedOutput) {
-        List<BigInteger> result = sorty.sortReverse(input);
+        List<BigInteger> result = collectionSorter.sortReverse(input);
         assertEquals(expectedOutput, result);
     }
 

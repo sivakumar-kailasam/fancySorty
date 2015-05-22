@@ -6,7 +6,7 @@ import java.util.Comparator;
 /**
  * @author Sivakumar Kailasam
  */
-public class ReverseBigIntComparator implements Comparator<BigInteger> {
+public final class ReverseBigIntComparator implements Comparator<BigInteger> {
 
     @Override
     public int compare(BigInteger firstNumber, BigInteger secondNumber) {

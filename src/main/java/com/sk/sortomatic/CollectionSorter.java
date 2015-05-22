@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * @author Sivakumar Kailasam
  */
-public class Sorty {
+public final class CollectionSorter {
 
 
     public List<BigInteger> sortReverse(List<BigInteger> numbersToSort) {
