@@ -24,7 +24,7 @@ public class SortedFileSplitter {
 
     public SortedFileSplitter(String temporaryFolder, Sorty sorty, long maxChunkSizeLimit) {
         this.temporaryFolder = new File(temporaryFolder);
-        if(!this.temporaryFolder.exists()){
+        if (!this.temporaryFolder.exists()) {
             this.temporaryFolder.mkdir();
         }
         this.sorty = sorty;
@@ -51,13 +51,13 @@ public class SortedFileSplitter {
 
             List<BigInteger> sortedContent = sorty.sortReverse(contentToBeSorted);
 
-            File temporaryFile = File.createTempFile("sortomatic",".tmp",this.temporaryFolder);
+            File temporaryFile = File.createTempFile("sortomatic", ".tmp", this.temporaryFolder);
             temporaryFile.deleteOnExit();
 
             OutputStream outputStream = new FileOutputStream(temporaryFile);
             BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, Charset.defaultCharset()));
 
-            for(BigInteger number: sortedContent){
+            for (BigInteger number : sortedContent) {
                 bufferedWriter.write(number.toString());
                 bufferedWriter.newLine();
             }

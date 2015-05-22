@@ -7,6 +7,4 @@ public class SortomaticTest {
 
     private Sortomatic sortomatic;
 
-
-
 }

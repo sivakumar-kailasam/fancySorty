@@ -17,11 +17,27 @@ import static org.junit.Assert.assertEquals;
 public class SortedFileSplitterTest {
 
     private SortedFileSplitter sortedFileSplitter;
-    
+    private String systemTempDirectory = System.getProperty("java.io.tmpdir");
+
+
     @Before
     public void setUp() throws Exception {
         long testChunkSize = 10;
-        sortedFileSplitter = new SortedFileSplitter("/tmp", new Sorty(), testChunkSize);
+        sortedFileSplitter = new SortedFileSplitter(systemTempDirectory, new Sorty(), testChunkSize);
+    }
+
+    @Test
+    public void createTempFolderWhenItDoesntExist() throws Exception {
+
+        File testFolder = new File(systemTempDirectory, "siva");
+        String testFolderPath = testFolder.getAbsolutePath();
+        if (testFolder.exists()) {
+            testFolder.delete();
+        }
+        new SortedFileSplitter(testFolderPath, new Sorty(), 1l);
+        assertThat(testFolder).exists();
+        testFolder.delete();
+
     }
 
     @Test

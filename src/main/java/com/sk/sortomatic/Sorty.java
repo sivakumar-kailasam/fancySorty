@@ -1,7 +1,10 @@
 package com.sk.sortomatic;
 
 import java.math.BigInteger;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 /**
  * @author Sivakumar Kailasam
@@ -15,13 +18,13 @@ public class Sorty {
 
         Comparator<BigInteger> comparator = null;
 
-        if(sortInReverse){
+        if (sortInReverse) {
             comparator = new Comparator<BigInteger>() {
                 @Override
                 public int compare(BigInteger firstNumber, BigInteger secondNumber) {
                     return secondNumber.compareTo(firstNumber);
                 }
-            } ;
+            };
         }
 
         Collections.sort(sortedNumbers, comparator);
