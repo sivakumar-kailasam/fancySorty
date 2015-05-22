@@ -3,6 +3,6 @@ jdk:
     - oraclejdk8
     - openjdk7
     - openjdk6
-caches:
+cache:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
