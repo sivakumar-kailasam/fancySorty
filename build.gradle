@@ -1,47 +1,48 @@
-apply plugin: 'java'
-apply plugin: 'idea'
-apply plugin: 'jacoco'
-apply plugin: 'application'
-
+apply plugin: "java"
+apply plugin: "idea"
+apply plugin: "jacoco"
+apply plugin: "application"
+apply from: "file://${projectDir}/properties.gradle"
 
 repositories {
     jcenter()
 }
 
+
 task createSampleInput {
     doFirst {
-        println 'This creates a sample input file, you know for testing the app manually'
-        file('input.txt').withWriter{writer->
+        println "This creates a sample input file ${inputFile}, you know for testing the app manually"
+        file(inputFile).withWriter{writer->
 
-            for(no in 1..100000000){
+            //TODO Let users pass this as an argument
+            for(no in 1..1000){
                 writer << "$no\n" 
             }
+
         }
     }
 }
 
-mainClassName    = 'com.sk.sortomatic.Sortomatic'
+mainClassName    = "com.sk.sortomatic.Sortomatic"
 
-ext.inputFile = ''
-
-task('magicTime', dependsOn: 'classes', type: JavaExec) {
-    main = 'com.sk.sortomatic.Sortomatic'
+task("magicTime", dependsOn: "classes", type: JavaExec) {
+    main = "com.sk.sortomatic.Sortomatic"
     classpath = sourceSets.main.runtimeClasspath
-    args = ["-i=${projectDir}/input.txt", "-n=100", "-t=${projectDir}/tmp", "-o=${projectDir}/output.txt"]
+    args = ["-i=${inputFile}", "-n=${noOfRowsExpectedInOutput}", "-t=${tempFolder}", "-o=${outputFile}"]
 }
 
 dependencies {
 
     // Logging libraries
-    compile 'org.slf4j:slf4j-api:1.7.12'
-    compile 'ch.qos.logback:logback-classic:1.0.13'
-    compile 'ch.qos.logback:logback-core:1.0.13'
+    compile "org.slf4j:slf4j-api:1.7.12"
+    compile "ch.qos.logback:logback-classic:1.0.13"
+    compile "ch.qos.logback:logback-core:1.0.13"
 
     // Nice abstraction to get user inputs from cli
-    compile 'commons-cli:commons-cli:1.3'
+    compile "commons-cli:commons-cli:1.3"
 
     // Test libaries
-    testCompile 'junit:junit:4.12'
+    testCompile "junit:junit:4.12"
     testCompile("org.easytesting:fest-assert:1.4")
 
 }
