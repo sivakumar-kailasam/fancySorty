@@ -59,6 +59,8 @@ public class Sortomatic {
 
         sortomatic.setupContextFromArgs(args);
 
+        Object[] logOpts = new Object[]{sortomatic.getInputFile(), sortomatic.getOutputFile(), sortomatic.getTemporaryFolder(), sortomatic.getNoOfRowsToPresentInOutput()};
+        logger.debug("Sortomatic initialized with \n input file {} \n output file {} \n temp folder {} \n top N rows to be found {}",logOpts );
 
         CollectionSorter sorter = new CollectionSorter();
         SortedFileSplitter sortedFileSplitter = new SortedFileSplitter(sortomatic.getTemporaryFolder(), sorter, MAX_CHUNK_SIZE);
@@ -116,8 +118,8 @@ public class Sortomatic {
         if (!this.temporaryFolder.exists()) {
             logger.debug("Creating temporary folder {} since it doesn't exist", this.temporaryFolder.getAbsolutePath());
             this.temporaryFolder.mkdir();
+            this.temporaryFolder.deleteOnExit();
         }
-
 
     }
 

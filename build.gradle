@@ -1,6 +1,7 @@
 apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'jacoco'
+apply plugin: 'application'
 
 
 repositories {
@@ -11,11 +12,22 @@ task createSampleInput {
     doFirst {
         println 'This creates a sample input file, you know for testing the app manually'
         file('input.txt').withWriter{writer->
-            for(no in 1..10){
+
+            for(no in 1..100000000){
                 writer << "$no\n" 
             }
         }
     }
+}
+
+mainClassName    = 'com.sk.sortomatic.Sortomatic'
+
+ext.inputFile = ''
+
+task('magicTime', dependsOn: 'classes', type: JavaExec) {
+    main = 'com.sk.sortomatic.Sortomatic'
+    classpath = sourceSets.main.runtimeClasspath
+    args = ["-i=${projectDir}/input.txt", "-n=100", "-t=${projectDir}/tmp", "-o=${projectDir}/output.txt"]
 }
 
 dependencies {
