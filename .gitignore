@@ -1,0 +1,9 @@
+bin
+build
+input.txt
+output.txt
+sortomatic.log
+*.iml
+*.ipr
+*.iws
+.gradle
