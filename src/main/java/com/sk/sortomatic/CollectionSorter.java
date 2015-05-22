@@ -7,6 +7,8 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
+ * Sorts collections (duh!)
+ *
  * @author Sivakumar Kailasam
  */
 public final class CollectionSorter {

@@ -22,15 +22,12 @@ public final class SortedFileSplitter {
 
     private File temporaryFolder;
 
-    public SortedFileSplitter(String temporaryFolder, CollectionSorter collectionSorter, long maxChunkSizeLimit) {
-        this.temporaryFolder = new File(temporaryFolder);
-        if (!this.temporaryFolder.exists()) {
-            logger.debug("Creating temporary folder {} since it doesn't exist", this.temporaryFolder.getAbsolutePath());
-            this.temporaryFolder.mkdir();
-        }
+    public SortedFileSplitter(File temporaryFolder, CollectionSorter collectionSorter, long maxChunkSizeLimit) {
+        this.temporaryFolder = temporaryFolder;
         this.collectionSorter = collectionSorter;
         this.maxChunkSizeLimit = maxChunkSizeLimit;
     }
+
 
     public List<File> splitSort(BufferedReader inputReader) throws IOException {
 

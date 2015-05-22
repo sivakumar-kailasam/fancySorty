@@ -1,8 +1,5 @@
 package com.sk.sortomatic;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -12,6 +9,8 @@ import java.util.List;
 import java.util.PriorityQueue;
 
 /**
+ * Handles Merging of previously sorted content chunks to provide truly Sorted Content
+ *
  * @author Sivakumar Kailasam
  */
 public class SortedContentMerger {

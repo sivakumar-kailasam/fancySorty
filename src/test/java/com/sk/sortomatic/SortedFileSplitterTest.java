@@ -19,7 +19,7 @@ public class SortedFileSplitterTest {
 
     private SortedFileSplitter sortedFileSplitter;
 
-    private String systemTempDirectory = System.getProperty("java.io.tmpdir");
+    private File systemTempDirectory = new File(System.getProperty("java.io.tmpdir"));
 
 
     @Before
@@ -30,22 +30,7 @@ public class SortedFileSplitterTest {
 
 
     @Test
-    public void createTempFolderWhenItIsNonExistent() throws Exception {
-
-        File testFolder = new File(systemTempDirectory, "siva");
-        String testFolderPath = testFolder.getAbsolutePath();
-        if (testFolder.exists()) {
-            testFolder.delete();
-        }
-        new SortedFileSplitter(testFolderPath, new CollectionSorter(), 1l);
-        assertThat(testFolder).exists();
-        testFolder.delete();
-
-    }
-
-
-    @Test
-    public void whenReaderHasLessContentThanChunkLimitReturnOneSortedFile() throws Exception {
+    public void splitSort_ReaderHasLessContentThanChunkLimit_ReturnOneSortedFile() throws Exception {
         BufferedReader inputReader = new BufferedReader(new StringReader("1\n3\n2\n"));
         List<File> result = sortedFileSplitter.splitSort(inputReader);
         assertEquals(1, result.size());
@@ -53,7 +38,7 @@ public class SortedFileSplitterTest {
 
 
     @Test
-    public void whenReaderHasMoreContentThanChunkLimitReturnMoreThanOneFile() throws Exception {
+    public void splitSort_ReaderHasMoreContentThanChunkLimit_ReturnMoreThanOneFile() throws Exception {
         BufferedReader inputReader = new BufferedReader(new StringReader("1\n3\n2\n5\n7\n60\n454\n23\n20\n3453453\n345353453534"));
         List<File> result = sortedFileSplitter.splitSort(inputReader);
         assertThat(result.size()).isGreaterThan(1);

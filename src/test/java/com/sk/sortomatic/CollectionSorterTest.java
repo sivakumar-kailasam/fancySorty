@@ -26,7 +26,7 @@ public class CollectionSorterTest {
 
 
     @Test
-    public void givenEmptyCollectionReturnsAnEmptyCollection() throws Exception {
+    public void sortReverse_EmptyCollection_ReturnsEmptyCollection() throws Exception {
 
         List<BigInteger> nos = new ArrayList<BigInteger>();
         List<BigInteger> result = collectionSorter.sortReverse(nos);
@@ -38,7 +38,7 @@ public class CollectionSorterTest {
 
 
     @Test
-    public void givenOneNumberInCollectionItReturnsIt() throws Exception {
+    public void sortReverse_OneNumberInCollection_ReturnsIt() throws Exception {
         List<BigInteger> nos = Arrays.asList(BigInteger.ONE);
         List<BigInteger> result = collectionSorter.sortReverse(nos);
         assertEquals(nos, result);
@@ -46,7 +46,7 @@ public class CollectionSorterTest {
 
 
     @Test
-    public void givenTwoUnorderedNumbersInCollectionItOrdersIt() throws Exception {
+    public void sortReverse_TwoUnorderedNumbersInCollection_OrdersIt() throws Exception {
         List<BigInteger> nos = Arrays.asList(BigInteger.ONE, BigInteger.TEN);
         List<BigInteger> expectedOutput = Arrays.asList(BigInteger.TEN, BigInteger.ONE);
         givenXUnorderedNumbersInCollectionItOrdersIt(nos, expectedOutput);
@@ -54,7 +54,7 @@ public class CollectionSorterTest {
 
 
     @Test
-    public void givenFiveUnorderedNumbersInCollectionItOrdersIt() throws Exception {
+    public void sortReverse_FiveUnorderedNumbersInCollection_OrdersIt() throws Exception {
         BigInteger bigInteger100 = BigInteger.valueOf(100L);
         BigInteger bigInteger300 = BigInteger.valueOf(300L);
         BigInteger bigInteger500 = BigInteger.valueOf(500L);

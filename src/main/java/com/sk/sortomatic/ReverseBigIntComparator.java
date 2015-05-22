@@ -4,6 +4,8 @@ import java.math.BigInteger;
 import java.util.Comparator;
 
 /**
+ * Comparator for {@link BigInteger} for reverse comparison of two numbers
+ *
  * @author Sivakumar Kailasam
  */
 public final class ReverseBigIntComparator implements Comparator<BigInteger> {

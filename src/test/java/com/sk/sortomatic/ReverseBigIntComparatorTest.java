@@ -1,7 +1,5 @@
 package com.sk.sortomatic;
 
-import org.fest.assertions.Assert;
-import org.fest.assertions.Assertions;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -31,19 +29,19 @@ public class ReverseBigIntComparatorTest {
 
 
     @Test
-    public void whenTwoNumbersAreEqualReturnsZero() throws Exception {
+    public void compare_TwoNumbersAreEqual_ReturnsZero() throws Exception {
         assertReturnValueForTwoNumbers(BigInteger.ONE, BigInteger.ONE, 0);
     }
 
 
     @Test
-    public void whenFirstNoIsSmallerReturnOne() throws Exception {
+    public void compare_FirstNoIsSmaller_ReturnOne() throws Exception {
         assertReturnValueForTwoNumbers(BigInteger.ZERO, BigInteger.ONE, 1);
     }
 
 
     @Test
-    public void whenSecondNoIsSmallerReturnNegOne() throws Exception {
+    public void compare_SecondNoIsSmaller_ReturnNegOne() throws Exception {
         assertReturnValueForTwoNumbers(BigInteger.ONE, BigInteger.ZERO, -1);
     }
 

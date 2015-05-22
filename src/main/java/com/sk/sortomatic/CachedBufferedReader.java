@@ -4,12 +4,15 @@ import java.io.BufferedReader;
 import java.io.IOException;
 
 /**
+ * <p>
  * Wrapper over {@link java.io.BufferedReader} to cache the
  * previously read line unless we explicitly want to move
  * to the next line in the reader.
  * <p/>
- * This is especially useful when used with a {@link java.util.PriorityQueue}
- * where comparator will constantly try to get the first line of the file
+ * <p>
+ * This is especially useful when used with  {@link java.util.PriorityQueue PriorityQueue}
+ * where comparator will constantly try to get the first line of the file.
+ * </p>
  *
  * @author Sivakumar Kailasam
  */
@@ -46,7 +49,7 @@ public final class CachedBufferedReader {
     /**
      * @return if cachedBufferedReader has no more content
      */
-    public Boolean isEmpty(){
+    public Boolean isEmpty() {
         return this.cachedLine == null;
     }
 
