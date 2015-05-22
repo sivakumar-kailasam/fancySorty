@@ -18,10 +18,12 @@ public class SortyTest {
 
     private Sorty sorty;
 
+
     @Before
     public void setUp() throws Exception {
         sorty = new Sorty();
     }
+
 
     @Test
     public void givenEmptyCollectionReturnsAnEmptyCollection() throws Exception {
@@ -33,6 +35,7 @@ public class SortyTest {
         assertEquals(0, result.size());
 
     }
+
 
     @Test
     public void givenOneNumberInCollectionItReturnsIt() throws Exception {
@@ -48,6 +51,7 @@ public class SortyTest {
         List<BigInteger> expectedOutput = Arrays.asList(BigInteger.TEN, BigInteger.ONE);
         givenXUnorderedNumbersInCollectionItOrdersIt(nos, expectedOutput);
     }
+
 
     @Test
     public void givenFiveUnorderedNumbersInCollectionItOrdersIt() throws Exception {

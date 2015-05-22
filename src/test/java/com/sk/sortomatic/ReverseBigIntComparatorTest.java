@@ -7,6 +7,8 @@ import org.junit.Test;
 
 import java.math.BigInteger;
 
+import static org.fest.assertions.Assertions.assertThat;
+
 /**
  * @author Sivakumar Kailasam
  */
@@ -19,31 +21,31 @@ public class ReverseBigIntComparatorTest {
         reverseBigIntComparator = new ReverseBigIntComparator();
     }
 
-    @Test
-    public void whenTwoNumbersAreEqualReturnsZero() throws Exception {
 
-        int result = reverseBigIntComparator.compare(BigInteger.ONE, BigInteger.ONE);
+    private void assertReturnValueForTwoNumbers(BigInteger firstNumber, BigInteger secondNumber, int returnValue) {
 
-        Assertions.assertThat(result).isEqualTo(0);
+        int result = reverseBigIntComparator.compare(firstNumber, secondNumber);
+        assertThat(result).isEqualTo(returnValue);
 
     }
 
+
+    @Test
+    public void whenTwoNumbersAreEqualReturnsZero() throws Exception {
+        assertReturnValueForTwoNumbers(BigInteger.ONE, BigInteger.ONE, 0);
+    }
+
+
     @Test
     public void whenFirstNoIsSmallerReturnOne() throws Exception {
-
-        int result = reverseBigIntComparator.compare(BigInteger.ZERO, BigInteger.ONE);
-
-        Assertions.assertThat(result).isEqualTo(1);
-
+        assertReturnValueForTwoNumbers(BigInteger.ZERO, BigInteger.ONE, 1);
     }
 
 
     @Test
     public void whenSecondNoIsSmallerReturnNegOne() throws Exception {
-
-        int result = reverseBigIntComparator.compare(BigInteger.ONE, BigInteger.ZERO);
-
-        Assertions.assertThat(result).isEqualTo(-1);
-
+        assertReturnValueForTwoNumbers(BigInteger.ONE, BigInteger.ZERO, -1);
     }
+
+
 }

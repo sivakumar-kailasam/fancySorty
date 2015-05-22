@@ -26,6 +26,7 @@ public class SortedFileSplitterTest {
         sortedFileSplitter = new SortedFileSplitter(systemTempDirectory, new Sorty(), testChunkSize);
     }
 
+
     @Test
     public void createTempFolderWhenItIsNonExistent() throws Exception {
 
@@ -39,6 +40,7 @@ public class SortedFileSplitterTest {
         testFolder.delete();
 
     }
+
 
     @Test
     public void whenReaderHasLessContentThanChunkLimitReturnOneSortedFile() throws Exception {
