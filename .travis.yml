@@ -4,5 +4,6 @@ jdk:
     - openjdk7
     - openjdk6
 cache:
-    - $HOME/.gradle/caches/
-    - $HOME/.gradle/wrapper/
+    directories: 
+        - $HOME/.gradle/caches/
+        - $HOME/.gradle/wrapper/
