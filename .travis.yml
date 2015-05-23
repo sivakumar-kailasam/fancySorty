@@ -4,4 +4,6 @@ jdk:
     - openjdk7
     - openjdk6
 script:
-    - df -h .
+    - ./gradlew check
+    - ./gradlew createSampleInput
+    - ./gradlew judgementTime

@@ -15,7 +15,7 @@ task createSampleInput {
         file(inputFile).withWriter{writer->
 
             //TODO Let users pass this as an argument
-            for(no in 1..1000){
+            for(no in 1..1000000000){
                 writer << "$no\n" 
             }
 
@@ -25,7 +25,7 @@ task createSampleInput {
 
 mainClassName    = "com.sk.sortomatic.Sortomatic"
 
-task("magicTime", dependsOn: "classes", type: JavaExec) {
+task("judgementTime", dependsOn: "classes", type: JavaExec) {
     main = "com.sk.sortomatic.Sortomatic"
     classpath = sourceSets.main.runtimeClasspath
     args = ["-i=${inputFile}", "-n=${noOfRowsExpectedInOutput}", "-t=${tempFolder}", "-o=${outputFile}"]
