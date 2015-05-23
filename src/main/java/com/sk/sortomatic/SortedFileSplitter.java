@@ -30,7 +30,6 @@ public final class SortedFileSplitter {
 
 
     public List<File> splitSort(BufferedReader inputReader) throws IOException {
-
         List<File> splitSortedFiles = new ArrayList<File>();
 
         List<BigInteger> contentToBeSorted = new ArrayList<BigInteger>();

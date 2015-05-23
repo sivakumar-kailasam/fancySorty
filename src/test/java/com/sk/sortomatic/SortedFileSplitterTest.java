@@ -39,7 +39,8 @@ public class SortedFileSplitterTest {
 
     @Test
     public void splitSort_ReaderHasMoreContentThanChunkLimit_ReturnMoreThanOneFile() throws Exception {
-        BufferedReader inputReader = new BufferedReader(new StringReader("1\n3\n2\n5\n7\n60\n454\n23\n20\n3453453\n345353453534"));
+        StringReader stringReader = new StringReader("1\n3\n2\n5\n7\n60\n454\n23\n20\n3453453\n345353453534");
+        BufferedReader inputReader = new BufferedReader(stringReader);
         List<File> result = sortedFileSplitter.splitSort(inputReader);
         assertThat(result.size()).isGreaterThan(1);
     }

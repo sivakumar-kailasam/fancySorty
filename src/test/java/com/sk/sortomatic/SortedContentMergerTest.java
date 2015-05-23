@@ -37,7 +37,6 @@ public class SortedContentMergerTest {
     }
 
     private void checkOutputForNnos(String resultContent, int noOfLinesToBeFound) throws Exception {
-
         BufferedReader firstBR = new BufferedReader(new StringReader("11\n9\n7\n"));
         BufferedReader secondBR = new BufferedReader(new StringReader("5\n3\n1\n"));
         BufferedReader thirdBR = new BufferedReader(new StringReader("10\n8\n6\n"));
@@ -46,15 +45,14 @@ public class SortedContentMergerTest {
         List<BufferedReader> contentCollection = Arrays.asList(firstBR, secondBR, thirdBR, fourthBR);
 
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        BufferedWriter bufferedFileWriter = new BufferedWriter(new OutputStreamWriter(outputStream,
-                Charset.defaultCharset()));
+        OutputStreamWriter outputSW = new OutputStreamWriter(outputStream, Charset.defaultCharset());
+        BufferedWriter bufferedFileWriter = new BufferedWriter(outputSW);
 
         sortedContentMerger.writeSortedStreamCollectionToWriter(contentCollection, bufferedFileWriter, noOfLinesToBeFound);
 
         String sortedContent = new String(outputStream.toByteArray(), Charset.defaultCharset());
 
         assertThat(sortedContent).isEqualTo(resultContent);
-
     }
 
 

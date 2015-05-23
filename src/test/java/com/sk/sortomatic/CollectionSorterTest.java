@@ -27,13 +27,11 @@ public class CollectionSorterTest {
 
     @Test
     public void sortReverse_EmptyCollection_ReturnsEmptyCollection() throws Exception {
-
         List<BigInteger> nos = new ArrayList<BigInteger>();
         List<BigInteger> result = collectionSorter.sortReverse(nos);
 
         assertNotNull(result);
         assertEquals(0, result.size());
-
     }
 
 
@@ -49,6 +47,7 @@ public class CollectionSorterTest {
     public void sortReverse_TwoUnorderedNumbersInCollection_OrdersIt() throws Exception {
         List<BigInteger> nos = Arrays.asList(BigInteger.ONE, BigInteger.TEN);
         List<BigInteger> expectedOutput = Arrays.asList(BigInteger.TEN, BigInteger.ONE);
+
         givenXUnorderedNumbersInCollectionItOrdersIt(nos, expectedOutput);
     }
 
@@ -61,6 +60,7 @@ public class CollectionSorterTest {
 
         List<BigInteger> nos = Arrays.asList(BigInteger.ONE, BigInteger.TEN, bigInteger100, bigInteger300, bigInteger500);
         List<BigInteger> expectedOutput = Arrays.asList(bigInteger500, bigInteger300, bigInteger100, BigInteger.TEN, BigInteger.ONE);
+
         givenXUnorderedNumbersInCollectionItOrdersIt(nos, expectedOutput);
     }
 

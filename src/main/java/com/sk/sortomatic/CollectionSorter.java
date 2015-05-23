@@ -15,14 +15,9 @@ public final class CollectionSorter {
 
 
     public List<BigInteger> sortReverse(List<BigInteger> numbersToSort) {
-
         List<BigInteger> sortedNumbers = new ArrayList<BigInteger>(numbersToSort);
-
-        Comparator<BigInteger> comparator = new ReverseBigIntComparator();
-
-        Collections.sort(sortedNumbers, comparator);
-
+        Collections.sort(sortedNumbers, new ReverseBigIntComparator());
         return sortedNumbers;
-
     }
+
 }

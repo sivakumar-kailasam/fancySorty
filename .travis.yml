@@ -3,7 +3,3 @@ jdk:
     - oraclejdk8
     - openjdk7
     - openjdk6
-script:
-    - ./gradlew check
-    - ./gradlew createSampleInput
-    - ./gradlew judgementTime

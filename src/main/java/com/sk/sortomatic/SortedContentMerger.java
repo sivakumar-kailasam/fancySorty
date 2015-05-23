@@ -17,7 +17,6 @@ public class SortedContentMerger {
 
 
     public void writeSortedStreamCollectionToWriter(List<BufferedReader> contentCollection, final BufferedWriter bufferedFileWriter, int topNLinesToFind) throws IOException {
-
         PriorityQueue<CachedBufferedReader> queueOfBuffers = getBufferedReaderPriorityQueue();
 
         for (BufferedReader br : contentCollection) {
@@ -44,12 +43,10 @@ public class SortedContentMerger {
         }
 
         bufferedFileWriter.close();
-
     }
 
 
     private PriorityQueue<CachedBufferedReader> getBufferedReaderPriorityQueue() {
-
         return new PriorityQueue<CachedBufferedReader>(10, new Comparator<CachedBufferedReader>() {
             @Override
             public int compare(CachedBufferedReader firstCBR, CachedBufferedReader secondCBR) {
@@ -61,7 +58,6 @@ public class SortedContentMerger {
 
             }
         });
-
     }
 
 

@@ -21,10 +21,8 @@ public class ReverseBigIntComparatorTest {
 
 
     private void assertReturnValueForTwoNumbers(BigInteger firstNumber, BigInteger secondNumber, int returnValue) {
-
         int result = reverseBigIntComparator.compare(firstNumber, secondNumber);
         assertThat(result).isEqualTo(returnValue);
-
     }
 
 

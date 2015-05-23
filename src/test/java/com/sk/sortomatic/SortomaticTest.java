@@ -1,7 +1,6 @@
 package com.sk.sortomatic;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.*;
@@ -58,21 +57,36 @@ public class SortomaticTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void setupContextFromArgs_InputFileIsAFolder_throwsException() throws Exception {
-        sortomatic.setupContextFromArgs(new String[]{"-i=" + systemTempDirectory.getAbsolutePath(), "-o=/output.txt", "-n=10", "-t=/tmp"});
+        sortomatic.setupContextFromArgs(new String[]{
+                "-i=" + systemTempDirectory.getAbsolutePath(),
+                "-o=/output.txt",
+                "-n=10",
+                "-t=/tmp"
+        });
     }
 
 
     @Test(expected = IllegalArgumentException.class)
     public void setupContextFromArgs_TopNRowCountIsZero_throwsException() throws Exception {
         File tempInputFile = generateEmptyInputFile();
-        sortomatic.setupContextFromArgs(new String[]{"-i=" + tempInputFile.getAbsolutePath(), "-o=/output.txt", "-n=0", "-t=/tmp"});
+        sortomatic.setupContextFromArgs(new String[]{
+                "-i=" + tempInputFile.getAbsolutePath(),
+                "-o=/output.txt",
+                "-n=0",
+                "-t=/tmp"
+        });
     }
 
 
     @Test(expected = IllegalArgumentException.class)
     public void setupContextFromArgs_TopNRowCountIsNegNo_throwsException() throws Exception {
         File tempInputFile = generateEmptyInputFile();
-        sortomatic.setupContextFromArgs(new String[]{"-i=" + tempInputFile.getAbsolutePath(), "-o=/output.txt", "-n=-1", "-t=/tmp"});
+        sortomatic.setupContextFromArgs(new String[]{
+                "-i=" + tempInputFile.getAbsolutePath(),
+                "-o=/output.txt",
+                "-n=-1",
+                "-t=/tmp"
+        });
     }
 
 
@@ -86,7 +100,12 @@ public class SortomaticTest {
         if (testFolder.exists()) {
             testFolder.delete();
         }
-        sortomatic.setupContextFromArgs(new String[]{"-i=" + tempInputFile.getAbsolutePath(), "-n=10", "-o=/output.txt", "-t=" + testFolderPath});
+        sortomatic.setupContextFromArgs(new String[]{
+                "-i=" + tempInputFile.getAbsolutePath(),
+                "-n=10",
+                "-o=/output.txt",
+                "-t=" + testFolderPath
+        });
         assertThat(testFolder).exists();
         testFolder.delete();
 
@@ -101,21 +120,14 @@ public class SortomaticTest {
     }
 
 
-    @Ignore
-    public void setupContextFromArgs_ArgsAreValid_setsValidContext() throws Exception {
-        File tempInputFile = generateEmptyInputFile();
-        File outputFile = new File(systemTempDirectory.getAbsolutePath(), "output.txt");
-        sortomatic.setupContextFromArgs(new String[]{"-i" + tempInputFile.getAbsolutePath(), "-n=10", "-o=" + outputFile.getAbsolutePath(), "-t=" + systemTempDirectory.getAbsolutePath()});
-    }
-
-
     /**
      * This test is more of an integration scenario
      */
     @Test
     public void main_ValidContext_CreatesSortedOutput() throws Exception {
         File tempInputFile = generateEmptyInputFile();
-        BufferedWriter br = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(tempInputFile), Charset.defaultCharset()));
+        Charset charset = Charset.defaultCharset();
+        BufferedWriter br = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(tempInputFile), charset));
         for (Long i = 0l; i <= 100; i++) {
             br.write(i.toString());
             br.newLine();
@@ -125,18 +137,24 @@ public class SortomaticTest {
         File outputFile = new File(systemTempDirectory.getAbsolutePath(), "output.txt");
         outputFile.deleteOnExit();
 
-        Sortomatic.main(new String[]{"-i" + tempInputFile.getAbsolutePath(), "-n=5", "-o=" + outputFile.getAbsolutePath(), "-t=" + systemTempDirectory.getAbsolutePath()});
+        Sortomatic.main(new String[]{
+                "-i" + tempInputFile.getAbsolutePath(),
+                "-n=5",
+                "-o=" + outputFile.getAbsolutePath(),
+                "-t=" + systemTempDirectory.getAbsolutePath()
+        });
 
-        BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(outputFile), Charset.defaultCharset()));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(outputFile), charset));
 
         String outputContent = "";
 
         String line = "";
-
         while (line != null && ((line = reader.readLine()) != null)) {
             outputContent += line + "\n";
         }
 
         assertThat(outputContent).isEqualTo("100\n99\n98\n97\n96\n");
     }
+
+
 }
