@@ -17,10 +17,10 @@ import java.util.List;
 public class Sortomatic {
 
 
-    private static final long MAX_CHUNK_SIZE = 10 * 1024 * 1024;
-
-
     private static Logger logger = LoggerFactory.getLogger(Sortomatic.class);
+
+
+    private static final long MAX_CHUNK_SIZE = 20 * 1024 * 1024;    
 
 
     private File inputFile;
