@@ -14,7 +14,6 @@ task createSampleInput {
         println "This creates a sample input file ${inputFile}, you know for testing the app manually"
         file(inputFile).withWriter{writer->
 
-            //TODO Let users pass this as an argument
             for(no in 1..1000000000){
                 writer << "$no\n" 
             }

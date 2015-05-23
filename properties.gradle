@@ -1,6 +1,6 @@
 ext {
     inputFile = "${projectDir}/input.txt"
-    noOfRowsExpectedInOutput = 100
+    noOfRowsExpectedInOutput = 10000000 
     tempFolder = "${projectDir}/tmp"
     outputFile = "${projectDir}/output.txt"
 }
