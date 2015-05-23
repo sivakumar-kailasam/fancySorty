@@ -51,8 +51,8 @@ public class SortedContentMerger {
             @Override
             public int compare(CachedBufferedReader firstCBR, CachedBufferedReader secondCBR) {
 
-                BigInteger topNoInFirstBR = BigInteger.valueOf(Long.valueOf(firstCBR.getCachedLine()));
-                BigInteger topNoInSecondBR = BigInteger.valueOf(Long.valueOf(secondCBR.getCachedLine()));
+                BigInteger topNoInFirstBR = new BigInteger(firstCBR.getCachedLine());
+                BigInteger topNoInSecondBR = new BigInteger(secondCBR.getCachedLine());
 
                 return new ReverseBigIntComparator().compare(topNoInFirstBR, topNoInSecondBR);
 

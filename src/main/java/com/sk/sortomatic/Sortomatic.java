@@ -20,7 +20,7 @@ public class Sortomatic {
     private static Logger logger = LoggerFactory.getLogger(Sortomatic.class);
 
 
-    private static final long MAX_CHUNK_SIZE = 20 * 1024 * 1024;    
+    private static final long MAX_CHUNK_SIZE = 20 * 1024 * 1024;
 
 
     private File inputFile;
@@ -55,7 +55,7 @@ public class Sortomatic {
 
     private static List<File> getSplitSortedFiles(Sortomatic sortomatic, SortedFileSplitter sortedFileSplitter) throws IOException {
         FileInputStream fileInputStream = new FileInputStream(sortomatic.getInputFile());
-        InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream, Charset.defaultCharset());
+        InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream, Charset.forName("UTF-8"));
         BufferedReader inputBufferedReader = new BufferedReader(inputStreamReader);
 
         List<File> splitFiles = sortedFileSplitter.splitSort(inputBufferedReader);
@@ -65,20 +65,20 @@ public class Sortomatic {
     }
 
 
-    private void mergeSortedContent( List<File> splitFiles) throws IOException {
+    private void mergeSortedContent(List<File> splitFiles) throws IOException {
         List<BufferedReader> bufferedReaders = new ArrayList<BufferedReader>();
 
-        Charset defaultCharset = Charset.defaultCharset();
+        Charset defaultCharset = Charset.forName("UTF-8");
         for (File file : splitFiles) {
             bufferedReaders.add(new BufferedReader(new InputStreamReader(new FileInputStream(file), defaultCharset)));
         }
 
-        OutputStreamWriter outputFileOutputSR = new OutputStreamWriter(new FileOutputStream(this.getOutputFile()), defaultCharset);
-        BufferedWriter outputBR = new BufferedWriter(outputFileOutputSR);
+        OutputStreamWriter outputFileOutputSW = new OutputStreamWriter(new FileOutputStream(this.getOutputFile()), defaultCharset);
+        BufferedWriter outputBW = new BufferedWriter(outputFileOutputSW);
 
         SortedContentMerger sortedContentMerger = new SortedContentMerger();
-        sortedContentMerger.writeSortedStreamCollectionToWriter(bufferedReaders, outputBR, this.getNoOfRowsToPresentInOutput());
-        outputBR.close();
+        sortedContentMerger.writeSortedStreamCollectionToWriter(bufferedReaders, outputBW, this.getNoOfRowsToPresentInOutput());
+        outputBW.close();
     }
 
 

@@ -35,15 +35,14 @@ public final class SortedFileSplitter {
         List<BigInteger> contentToBeSorted = new ArrayList<BigInteger>();
         String line = "";
 
-
         while (line != null) {
 
             long currentChunkSize = 0;
 
             while ((currentChunkSize < maxChunkSizeLimit) && ((line = inputReader.readLine()) != null)) {
-                BigInteger noInTheLine = BigInteger.valueOf(Long.valueOf(line));
+                BigInteger noInTheLine = new BigInteger(line);
                 contentToBeSorted.add(noInTheLine);
-                currentChunkSize += line.length() * 2;
+                currentChunkSize += line.length() + 2;
             }
 
             List<BigInteger> sortedContent = collectionSorter.sortReverse(contentToBeSorted);
@@ -66,7 +65,7 @@ public final class SortedFileSplitter {
         logger.debug("Created temp file {}", temporaryFile.getAbsolutePath());
 
         OutputStream outputStream = new FileOutputStream(temporaryFile);
-        BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, Charset.defaultCharset()));
+        BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, Charset.forName("UTF-8")));
 
         for (BigInteger number : sortedContent) {
             bufferedWriter.write(number.toString());

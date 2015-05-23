@@ -126,13 +126,13 @@ public class SortomaticTest {
     @Test
     public void main_ValidContext_CreatesSortedOutput() throws Exception {
         File tempInputFile = generateEmptyInputFile();
-        Charset charset = Charset.defaultCharset();
-        BufferedWriter br = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(tempInputFile), charset));
+        Charset charset = Charset.forName("UTF-8");
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(tempInputFile), charset));
         for (Long i = 0l; i <= 100; i++) {
-            br.write(i.toString());
-            br.newLine();
+            bw.write(i.toString());
+            bw.newLine();
         }
-        br.close();
+        bw.close();
 
         File outputFile = new File(systemTempDirectory.getAbsolutePath(), "output.txt");
         outputFile.deleteOnExit();

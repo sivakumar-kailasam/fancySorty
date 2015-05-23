@@ -2,6 +2,7 @@ package com.sk.sortomatic;
 
 import org.junit.Before;
 import org.junit.Test;
+import sun.nio.cs.StandardCharsets;
 
 import java.io.*;
 import java.nio.charset.Charset;
@@ -45,12 +46,13 @@ public class SortedContentMergerTest {
         List<BufferedReader> contentCollection = Arrays.asList(firstBR, secondBR, thirdBR, fourthBR);
 
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        OutputStreamWriter outputSW = new OutputStreamWriter(outputStream, Charset.defaultCharset());
+        Charset charset = Charset.forName("UTF-8");
+        OutputStreamWriter outputSW = new OutputStreamWriter(outputStream, charset);
         BufferedWriter bufferedFileWriter = new BufferedWriter(outputSW);
 
         sortedContentMerger.writeSortedStreamCollectionToWriter(contentCollection, bufferedFileWriter, noOfLinesToBeFound);
 
-        String sortedContent = new String(outputStream.toByteArray(), Charset.defaultCharset());
+        String sortedContent = new String(outputStream.toByteArray(), charset);
 
         assertThat(sortedContent).isEqualTo(resultContent);
     }
